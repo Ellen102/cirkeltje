@@ -58,17 +58,23 @@ public class TestBeweging extends Application {
 
          
          root.getChildren().add(circle);
-         primaryStage.setWidth(200);
-         primaryStage.setHeight(200);
+         primaryStage.setWidth(225);
+         primaryStage.setHeight(225);
          primaryStage.setScene(new Scene(root));       
          
          primaryStage.getScene().setOnKeyPressed(new EventHandler<KeyEvent>(){
 
             @Override
             public void handle(KeyEvent t) {
+                Double xplus = dX.get(t.getCode());
+                Double yplus = dY.get(t.getCode());
                 if(dX.get(t.getCode()) != null){
-                    x += dX.get(t.getCode());
-                    y += dY.get(t.getCode());
+                    if((x<200 && x>0)|| (x>=200 && xplus <= 0) || (x<=0 && xplus>=0)){
+                    x += xplus;
+                    }
+                    if((y<200 && y>0)|| (y>=200 && yplus <= 0) || (y<=0 && yplus>=0)){
+                    y += yplus;
+                    }
                     circle.setTranslateX(x);
                     circle.setTranslateY(y);
                 }
