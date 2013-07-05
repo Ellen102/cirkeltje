@@ -9,12 +9,8 @@ import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.Scene;
-import javafx.scene.canvas.Canvas;
-import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.ArcType;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 
@@ -49,7 +45,7 @@ public class TestBeweging extends Application {
     private static Circle circle;
     @Override
     public void start(Stage primaryStage) {
-        primaryStage.setTitle("Drawing Operations Test");
+        primaryStage.setTitle("Cirkeltje");
         Group root = new Group();
         
          circle = new Circle();
@@ -86,13 +82,7 @@ public class TestBeweging extends Application {
     }
 
     
-//     private void drawShapes(GraphicsContext gc) {
-//        gc.setFill(Color.GREEN);
-//        gc.setStroke(Color.BLACK);
-//        gc.setLineWidth(5);
-//        gc.fillOval(10, 60, 30, 30);
-//
-//    }
+
     /**
      * The main() method is ignored in correctly deployed JavaFX application.
      * main() serves only as fallback in case the application can not be
