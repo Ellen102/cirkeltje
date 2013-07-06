@@ -42,6 +42,8 @@ public class TestBeweging extends Application {
     
     private static int x;
     private static int y;
+    private static int grootte = 200;
+    private static int straal = 20;    
     private static Circle circle;
     @Override
     public void start(Stage primaryStage) {
@@ -51,15 +53,15 @@ public class TestBeweging extends Application {
          circle = new Circle();
          x=25;
          y=25;
-         circle.setRadius(20);
+         circle.setRadius(straal);
          
          circle.setTranslateX(x);
          circle.setTranslateY(y);
 
          
          root.getChildren().add(circle);
-         primaryStage.setWidth(225);
-         primaryStage.setHeight(225);
+         primaryStage.setWidth(grootte);
+         primaryStage.setHeight(grootte);
          primaryStage.setScene(new Scene(root));       
          
          primaryStage.getScene().setOnKeyPressed(new EventHandler<KeyEvent>(){
@@ -69,10 +71,10 @@ public class TestBeweging extends Application {
                 Double xplus = dX.get(t.getCode());
                 Double yplus = dY.get(t.getCode());
                 if(dX.get(t.getCode()) != null){
-                    if((x<200 && x>0)|| (x>=200 && xplus <= 0) || (x<=0 && xplus>=0)){
+                    if((x<grootte && x>0)|| (x>=grootte && xplus <= 0) || (x<=0 && xplus>=0)){
                     x += xplus;
                     }
-                    if((y<200 && y>0)|| (y>=200 && yplus <= 0) || (y<=0 && yplus>=0)){
+                    if((y<grootte && y>0)|| (y>=grootte && yplus <= 0) || (y<=0 && yplus>=0)){
                     y += yplus;
                     }
                     circle.setTranslateX(x);
