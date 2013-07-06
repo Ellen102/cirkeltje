@@ -4,16 +4,21 @@
  */
 package JAXBtest;
 
+import java.io.File;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
 
 /**
  *
  * @author Ellen
+ * 
+ * http://www.vogella.com/articles/JAXB/article.html
+ * 
  */
 public class TEST extends Application {
     
@@ -29,6 +34,15 @@ public class TEST extends Application {
                System.out.println("-----");
            }
            
+        // create JAXB context and instantiate marshaller
+        JAXBContext context = JAXBContext.newInstance(Lijst.class);
+        Marshaller m = context.createMarshaller();
+        m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
+
+        // Write to System.out
+        m.marshal(ls, System.out);
+        // Write to File
+        m.marshal(ls, new File("./schrijf.xml"));
            
         } catch (JAXBException ex) {
             System.err.println(ex);
