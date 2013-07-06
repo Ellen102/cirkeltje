@@ -11,12 +11,9 @@ import static javafx.application.Application.launch;
 import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.Scene;
-import javafx.scene.canvas.Canvas;
-import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
@@ -75,6 +72,9 @@ public class twee extends Application {
         }
         
         circles.add(new Circle(50,50,10, Color.BLUE));
+        circles.add(new Circle(150,200,10, Color.BLUE));
+
+        
         for (Circle c : circles){
             root.getChildren().add(c);
         }
