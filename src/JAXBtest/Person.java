@@ -22,7 +22,6 @@ public class Person {
     
     @XmlElement(name = "name")
     public void setName(String name) {
-        System.out.println("---"+name);
         this.name = name;
     }
 

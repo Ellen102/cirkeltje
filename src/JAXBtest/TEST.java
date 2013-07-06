@@ -4,6 +4,8 @@
  */
 package JAXBtest;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import javax.xml.bind.JAXBContext;
@@ -16,16 +18,21 @@ import javax.xml.bind.JAXBException;
 public class TEST extends Application {
     
     @Override
-    public void start(Stage primaryStage) throws JAXBException {
+    public void start(Stage primaryStage) {
+        try {
             JAXBContext jc = JAXBContext.newInstance(Lijst.class);
-            Lijst ls = (Lijst) jc.createUnmarshaller().unmarshal(
-                    TEST.class.getResource("xmldoc.xml"));
+            Lijst ls = (Lijst) jc.createUnmarshaller().unmarshal(TEST.class.getResource("xmldoc.xml"));
             
            for(Person p : ls.getList()){
                System.out.println(p.getName());
                System.out.println(p.getTekst());
                System.out.println("-----");
            }
+           
+           
+        } catch (JAXBException ex) {
+            System.err.println(ex);
+        }
     }
 
     /**
