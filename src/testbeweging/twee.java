@@ -36,6 +36,7 @@ public class twee extends Application {
     private static final double OFFSET = 10;
     
     private List<Rectangle> rectangles = new ArrayList<>();
+    private List<Circle> circles = new ArrayList<>();
     
     static {
         dX = new HashMap<>();
@@ -59,7 +60,6 @@ public class twee extends Application {
         primaryStage.setTitle("Game Engine Test");
         Group root = new Group();
         
-        initSquare(root);
 
         primaryStage.setScene(new Scene(root));
         
@@ -74,24 +74,40 @@ public class twee extends Application {
             root.getChildren().add(rect);
         }
         
+        circles.add(new Circle(50,50,10, Color.BLUE));
+        for (Circle c : circles){
+            root.getChildren().add(c);
+        }
+        
+        
+        initSquare(root); //naar voorgrond zetten (opzoeken altijd ofzo)
+        
         primaryStage.getScene().setOnKeyPressed(new EventHandler<KeyEvent>(){
 
             @Override
             public void handle(KeyEvent t) {
-                double nx = x;
-                double ny = y;
+ 
                 
                 if(dX.get(t.getCode()) != null){
+                    double nx = x;
+                    double ny = y;
                     nx += dX.get(t.getCode());
                     ny += dY.get(t.getCode());
+                    
+                    
+                    if (!pointCollides(nx, ny)){
+                        x = nx;
+                        y = ny;
+                    }
+                
+                    updateGraphics();
+                }else if(t.getCode() == KeyCode.SPACE){
+                    if(onCircle(x, y)){
+                        System.out.println("spatie");
+                    }
                 }
                 
-                if (!pointCollides(nx, ny)){
-                    x = nx;
-                    y = ny;
-                }
                 
-                updateGraphics();
             }
             
         });
@@ -131,6 +147,18 @@ public class twee extends Application {
         
     }
 
+    private boolean onCircle(double nx, double ny){
+        for (Circle c : circles){
+            if(c.getCenterX()+2*c.getRadius()>nx && c.getCenterX()-2*c.getRadius()<nx
+                    &&
+               c.getCenterY()+2*c.getRadius()>ny && c.getCenterY()-2*c.getRadius()<ny 
+                    ){
+                return true;
+            }
+        }
+        return false;
+    }
+    
     /**
      * The main() method is ignored in correctly deployed JavaFX application.
      * main() serves only as fallback in case the application can not be
