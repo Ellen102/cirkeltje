@@ -1,8 +1,6 @@
 package xml2beeld;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import javafx.application.Application;
 import static javafx.application.Application.launch;
 import javafx.event.EventHandler;
@@ -10,36 +8,30 @@ import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
-import javafx.scene.shape.Shape;
 import javafx.stage.Stage;
-import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import lezen.Building;
 import lezen.Item;
 import lezen.Person;
-import lezen.World;
+import mvc1.Model;
 
 
 /**
  *
  * @author Sebastiaan
  */
-public class vijf extends Application {
+public class zes extends Application {
     
     private double x;
     private double y;
-    private static Rectangle rectangle;
 
     private static final HashMap<KeyCode,Double> dX;
     private static final HashMap<KeyCode,Double> dY;
     private static final double OFFSET = 10;
     
-    private List<Rectangle> rectangles = new ArrayList<>();
-    private List<Person> circles = new ArrayList<>();
-    private List<Item> items = new ArrayList<>();
+    private Model model;
 
     
     static {
@@ -63,36 +55,13 @@ public class vijf extends Application {
     @Override
     public void start(Stage primaryStage) throws JAXBException {
         primaryStage.setTitle("Game Engine Test");
-        
-
         primaryStage.setScene(new Scene(root));
-        
-/*
- * lees
- * 
- */
-        JAXBContext jc = JAXBContext.newInstance(World.class);
-        World ls = (World) jc.createUnmarshaller().unmarshal(vijf.class.getResource("Wereld.xml"));
-        
-        for(Building b : ls.getBuildings()){
-            Shape shape = b.getShape();
-            rectangles.add((Rectangle) shape);
-            root.getChildren().add(shape);
-        }
-        
-        for(Item b : ls.getItems()){
-            Shape shape = b.getShape();
-            items.add(b);
-            root.getChildren().add(shape);
-        }
-        
-        for(Person b : ls.getPersons()){
-            Shape shape = b.getShape();
-            circles.add(b);
-            root.getChildren().add(shape);
-        }
-        
-        initSquare(root); //naar voorgrond zetten (opzoeken altijd ofzo)
+        /*
+         * lijst vn componenten
+         * 
+         * falsspelen met root ...
+         */
+        model = new Model(root);
         
         primaryStage.getScene().setOnKeyPressed(new EventHandler<KeyEvent>(){
 
@@ -113,6 +82,7 @@ public class vijf extends Application {
                     }
                 
                     updateGraphics();
+                    
                 }else if(t.getCode() == KeyCode.SPACE){
                     Person p = onCircle(x, y);
                     if(p !=null){
@@ -121,7 +91,7 @@ public class vijf extends Application {
                         Item i = onItem(x ,y);
                         if(i != null){
                             System.out.println("je vond " + i.getName());
-                            verwijder(i);
+                            model.verwijder(i);
                         }
                     
                     }
@@ -138,26 +108,17 @@ public class vijf extends Application {
         primaryStage.setHeight(600);
         primaryStage.show();
     }
-    private void initSquare(Group root) {
-        double width = 5.0;
-        double height = 10.0;
-        rectangle = new Rectangle(width, height);
-        x = 20;
-        y = 20;
-        rectangle.setFill(Color.YELLOW);
-        root.getChildren().add(rectangle);
-        rectangle.toFront(); // :/
-    }
+
 
     
     private void updateGraphics(){
-        rectangle.setTranslateX(x);
-        rectangle.setTranslateY(y);
+        model.verplaats(x, y);
     }
     
     private boolean pointCollides(double x, double y){
         
-        for (Rectangle rect : rectangles){
+        for (Building b : model.getBuildings()){
+            Rectangle rect = (Rectangle) b.getShape();
             if (x <= rect.getX()+rect.getWidth() && x >= rect.getX() 
                     && y <= rect.getY()+rect.getHeight() && y >= rect.getY()){
                 return true;
@@ -169,7 +130,7 @@ public class vijf extends Application {
     }
 
     private Person onCircle(double nx, double ny){
-        for (Person p : circles){
+        for (Person p : model.getPersons()){
             Circle c = (Circle) p.getShape();
             if(c.getCenterX()+2*c.getRadius()>nx && c.getCenterX()-2*c.getRadius()<nx
                     &&
@@ -182,7 +143,7 @@ public class vijf extends Application {
     }
     
     private Item onItem(double nx, double ny){
-        for (Item i : items){
+        for (Item i : model.getItems()){
             Rectangle s = (Rectangle) i.getShape();
             if(s.getX()== nx
                     &&
@@ -195,10 +156,7 @@ public class vijf extends Application {
     }
     
     
-    private void verwijder(Item i){
-        root.getChildren().remove(i.getShape());
-        items.remove(i);
-    }
+
     
     
     
