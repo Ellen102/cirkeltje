@@ -25,6 +25,7 @@ public class TEST extends Application {
     @Override
     public void start(Stage primaryStage) {
         try {
+            //lezen
             JAXBContext jc = JAXBContext.newInstance(Lijst.class);
             Lijst ls = (Lijst) jc.createUnmarshaller().unmarshal(TEST.class.getResource("xmldoc.xml"));
             
@@ -33,7 +34,8 @@ public class TEST extends Application {
                System.out.println(p.getTekst());
                System.out.println("-----");
            }
-           
+         
+        //schrijven
         // create JAXB context and instantiate marshaller
         JAXBContext context = JAXBContext.newInstance(Lijst.class);
         Marshaller m = context.createMarshaller();
@@ -43,7 +45,8 @@ public class TEST extends Application {
         m.marshal(ls, System.out);
         // Write to File
         m.marshal(ls, new File("./schrijf.xml"));
-           
+        
+        
         } catch (JAXBException ex) {
             System.err.println(ex);
         }
