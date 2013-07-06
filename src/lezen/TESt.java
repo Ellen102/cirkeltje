@@ -25,7 +25,7 @@ public class TESt {
             
             for(Person p : ls.getPersons()){
                 System.out.println(p.getName());
-                System.out.println(p.getHeight());
+                System.out.println(p.getRadius());
                 System.out.println(p.getZin());
             }
             System.out.println("----");

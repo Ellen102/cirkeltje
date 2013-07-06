@@ -15,8 +15,7 @@
         <person name="jantje">
             <x>20</x>
             <y>20</y>
-            <width>5</width>
-            <height>5</height>
+            <radius>10</radius>
             <zin>yolo</zin>
         </person>
     </persons>
