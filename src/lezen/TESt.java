@@ -20,8 +20,8 @@ public class TESt {
     public static void main(String[] args) {
         try {
             //lezen
-            JAXBContext jc = JAXBContext.newInstance(Reader.class);
-            Reader ls = (Reader) jc.createUnmarshaller().unmarshal(TESt.class.getResource("Wereld.xml"));
+            JAXBContext jc = JAXBContext.newInstance(World.class);
+            World ls = (World) jc.createUnmarshaller().unmarshal(World.class.getResource("Wereld.xml"));
             
             for(Person p : ls.getPersons()){
                 System.out.println(p.getName());
@@ -29,13 +29,13 @@ public class TESt {
                 System.out.println(p.getZin());
             }
             System.out.println("----");
-//            for(Item i : ls.getItems()){
-//                System.out.println(i.getName());
-//                System.out.println(i.getHeight());
-//            }
-//            for(Building b : ls.getBuildings()){
-//                System.out.println(b.getName());
-//            }
+            for(Item i : ls.getItems()){
+                System.out.println(i.getName());
+                System.out.println(i.getHeight());
+            }
+            for(Building b : ls.getBuildings()){
+                System.out.println(b.getName());
+            }
 
 
         

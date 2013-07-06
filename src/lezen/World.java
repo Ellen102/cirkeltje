@@ -15,7 +15,7 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author Ellen
  */
 @XmlRootElement(name="wereld")
-public class Reader {
+public class World {
     
     private List<Building> buildings;
     private List<Person> persons;
