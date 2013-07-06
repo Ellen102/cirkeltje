@@ -4,7 +4,6 @@ To change this template, choose Tools | Templates
 and open the template in the editor.
 -->
 
-<root>
 <lijst>
     <item>
         <name>een</name>
@@ -15,4 +14,3 @@ and open the template in the editor.
         <tekst>tweetesttesttest</tekst>
      </item>
 </lijst>
-</root>

@@ -13,17 +13,16 @@ import javax.xml.bind.annotation.XmlRootElement;
  *
  * @author Ellen
  */
-@XmlRootElement(name="root")
+@XmlRootElement(name="lijst")
 public class Lijst {
     private List<Person> list;
 
-    @XmlElement (name = "lijst")
+    @XmlElement (name = "item")
     public List<Person> getList() {
         return list;
     }
 
     public void setList(List<Person> list) {
-        System.out.println("setlist");
         this.list = list;
     }
     
