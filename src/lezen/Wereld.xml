@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+
+<wereld>
+    <persons>
+        <person name="jantje">
+            <x>20</x>
+            <y>20</y>
+            <width>5</width>
+            <height>5</height>
+            <zin>yolo</zin>
+        </person>
+    </persons>
+</wereld>
