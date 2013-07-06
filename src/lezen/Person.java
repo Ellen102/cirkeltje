@@ -1,5 +1,6 @@
 package lezen;
 
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Shape;
 
@@ -12,6 +13,12 @@ public class Person extends Figureke{
     private double radius;
     private Shape shape;
 
+    public Person() {
+    super.setFill(Color.BLUE);
+    }
+
+    
+    
     public double getRadius() {
         return radius;
     }

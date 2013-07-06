@@ -1,7 +1,4 @@
-package testbeweging;
-
-
-
+package xml2beeld;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -18,14 +15,19 @@ import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
 import javafx.stage.Stage;
-import util.Item;
-import util.Person;
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import lezen.Building;
+import lezen.Item;
+import lezen.Person;
+import lezen.World;
+
 
 /**
  *
  * @author Sebastiaan
  */
-public class vier extends Application {
+public class vijf extends Application {
     
     private double x;
     private double y;
@@ -59,38 +61,36 @@ public class vier extends Application {
     
     private final Group root = new Group();
     @Override
-    public void start(Stage primaryStage) {
+    public void start(Stage primaryStage) throws JAXBException {
         primaryStage.setTitle("Game Engine Test");
         
 
         primaryStage.setScene(new Scene(root));
         
-        /*
-         * Test code
-         */
-        rectangles.add(new Rectangle(40, 100, 50, 200));
-        rectangles.add(new Rectangle(300,200,420,230));
+/*
+ * lees
+ * 
+ */
+        JAXBContext jc = JAXBContext.newInstance(World.class);
+        World ls = (World) jc.createUnmarshaller().unmarshal(vijf.class.getResource("Wereld.xml"));
         
-        for (Rectangle rect : rectangles){
-            rect.setFill(Color.GRAY);
-            root.getChildren().add(rect);
+        for(Building b : ls.getBuildings()){
+            Shape shape = b.getShape();
+            rectangles.add((Rectangle) shape);
+            root.getChildren().add(shape);
         }
         
-        circles.add(new Person("Blauw bolletje",new Circle(50,50,10, Color.BLUE),"Ik ben een blauw bolletje"));
-        circles.add(new Person("Blauw cirkeltje",new Circle(150,200,10, Color.BLUE),"ik ook"));
-
-        
-        for (Person c : circles){
-            root.getChildren().add(c.getCircle());
+        for(Item b : ls.getItems()){
+            Shape shape = b.getShape();
+            items.add(b);
+            root.getChildren().add(shape);
         }
         
-        items.add(new Item("klavertjevier", new Rectangle(160, 60, 5, 5), "geluksbrenger"));
-        for (Item i : items){
-            Shape rect = i.getShape();
-            rect.setFill(Color.GREEN);
-            root.getChildren().add(rect);
+        for(Person b : ls.getPersons()){
+            Shape shape = b.getShape();
+            circles.add(b);
+            root.getChildren().add(shape);
         }
-        
         
         initSquare(root); //naar voorgrond zetten (opzoeken altijd ofzo)
         
@@ -116,11 +116,11 @@ public class vier extends Application {
                 }else if(t.getCode() == KeyCode.SPACE){
                     Person p = onCircle(x, y);
                     if(p !=null){
-                        System.out.println(p.getName()+" : "+ p.getTekst());
+                        System.out.println(p.getName()+" : "+ p.getZin());
                     }else{
                         Item i = onItem(x ,y);
                         if(i != null){
-                            System.out.println("je vond " + i.getName() +" : "+i.getTekst());
+                            System.out.println("je vond " + i.getName());
                             verwijder(i);
                         }
                     
@@ -146,6 +146,7 @@ public class vier extends Application {
         y = 20;
         rectangle.setFill(Color.YELLOW);
         root.getChildren().add(rectangle);
+        rectangle.toFront();
     }
 
     
@@ -169,7 +170,7 @@ public class vier extends Application {
 
     private Person onCircle(double nx, double ny){
         for (Person p : circles){
-            Circle c = p.getCircle();
+            Circle c = (Circle) p.getShape();
             if(c.getCenterX()+2*c.getRadius()>nx && c.getCenterX()-2*c.getRadius()<nx
                     &&
                c.getCenterY()+2*c.getRadius()>ny && c.getCenterY()-2*c.getRadius()<ny 

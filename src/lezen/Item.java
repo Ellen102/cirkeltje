@@ -1,6 +1,7 @@
 
 package lezen;
 
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
 
@@ -12,6 +13,10 @@ public class Item  extends Figureke{
    private double height;
    private double width;
    private Shape shape;
+
+    public Item() {
+       super.setFill(Color.GREEN);
+    }
    
    @Override
    public Shape getShape() {
@@ -21,7 +26,8 @@ public class Item  extends Figureke{
         }
         return shape;
     }
-       public double getHeight() {
+    
+   public double getHeight() {
         return height;
     }
 

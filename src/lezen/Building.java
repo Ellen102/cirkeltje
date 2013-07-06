@@ -1,5 +1,6 @@
 package lezen;
 
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
 
@@ -12,7 +13,11 @@ public class Building extends Figureke{
    private double width;
    private Shape shape;
 
-  
+
+   public Building(){
+       super.setFill(Color.GRAY);
+   }
+    
    @Override
    public Shape getShape() {
         if(shape == null){
@@ -37,4 +42,6 @@ public class Building extends Figureke{
     public void setWidth(double width) {
         this.width = width;
     }
+
+
 }

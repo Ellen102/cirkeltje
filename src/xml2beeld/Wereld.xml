@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 
-<!-- test -->
+
 <wereld>
     <buildings>
         <building name="gebouw1">
@@ -22,6 +22,12 @@
             <width>50</width>
             <height>50</height>
         </building>
+        <building name="gebouw4">
+            <x>200</x>
+            <y>200</y>
+            <width>100</width>
+            <height>100</height>
+        </building>
     </buildings>
     <persons>
         <person name="jantje">
@@ -30,11 +36,23 @@
             <radius>10</radius>
             <zin>yolo</zin>
         </person>
+        <person name="iemand">
+            <x>190</x>
+            <y>190</y>
+            <radius>10</radius>
+            <zin>hallo!</zin>
+        </person>
     </persons>
     <items>
         <item name="klavertje">
-            <x>20</x>
-            <y>20</y>
+            <x>170</x>
+            <y>170</y>
+            <width>5</width>
+            <height>5</height>
+        </item>
+         <item name="klavertje">
+            <x>160</x>
+            <y>160</y>
             <width>5</width>
             <height>5</height>
         </item>

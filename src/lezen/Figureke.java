@@ -8,12 +8,17 @@ import javax.xml.bind.annotation.XmlAttribute;
  *
  * @author Ellen
  */
+
+/*
+ * !! waarde mogen niet meer aangepast worden na aanmaak !!
+ */
 public abstract class Figureke {
    private double x;
    private double y;
    private String name;
-   private Color fill = Color.GREEN;
    private String vorm;
+   private Color fill = Color.BLACK;
+
 
     public Color getFill() {
         return fill;
@@ -21,8 +26,8 @@ public abstract class Figureke {
 
     protected void setFill(Color fill) {
         this.fill = fill;
-        getShape().setFill(fill);
     }
+    
     public abstract Shape getShape();
 
     /*
